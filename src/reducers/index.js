@@ -1,15 +1,13 @@
 import { combineReducers } from 'redux';
 
-// calling the individual reducers
-import detectReducer from './detect-reducer';
-import galleryReducer from './gallery-reducer';
+// calling the default reducer to create a link
 import registerReducer from './register-reducer';
+import recognizeReducer from './recognize-reducer';
 
 const rootReducers = combineReducers({
     // add reducer files references here
-    userData: detectReducer,
-    galleryData: galleryReducer,
-    regData: registerReducer
+    regData: registerReducer,
+    detData: recognizeReducer
 });
 
 export default rootReducers;

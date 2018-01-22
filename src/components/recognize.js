@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import Webcam from 'react-webcam';
 import '../styles/register.css';
 
+// material-ui component
+import RaisedButton from 'material-ui/RaisedButton';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { registerUser } from '../actions';
+import { recognizeUser } from '../actions';
 
-import UserRegister from './user-register';
-
-// material-ui components
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
+import UserRecognize from './user-recognize';
 
 // loader styling
 const style = {
@@ -29,16 +28,14 @@ const style = {
     },
 };
 
-class Register extends Component {
+class Recognize extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            username: '',
             load: false
         };
     }
-
     setRef = (webcam) => {
         this.webcam = webcam;
     }
@@ -47,36 +44,32 @@ class Register extends Component {
         this.setState({
             load: true
         });
+
         const imageSrc = this.webcam.getScreenshot();
-        console.log(imageSrc);
-        axios.post(`https://api.kairos.com/enroll`, {
+        // console.log(imageSrc);
+        axios.post(`https://api.kairos.com/recognize`, {
             gallery_name: 'cameriaGallery',
-            image: imageSrc,
-            subject_id: this.state.username
+            image: imageSrc
         }, {
                 headers: {
                     app_id: '18cac37a',
                     app_key: '600e696b44be685585afc44e0b9b144e'
                 }
             }).then((response) => {
-                console.log(response);
-                this.props.registerUser(response.data);
+                console.log('response', response);
+                this.props.recognizeUser(response.data);
                 this.setState({
                     load: false
                 });
+            }).catch((error) => {
+                console.log(error);
             });
     };
-
-    handleUsername(e) {
-        this.setState({
-            username: e.target.value
-        });
-    }
 
     render() {
         return (
             <div style={{ 'textAlign': 'center' }}>
-                <h3>REGISTER FACE</h3>
+                <h3>DETECT FACE</h3>
                 <Webcam
                     audio={false}
                     height={320}
@@ -84,17 +77,6 @@ class Register extends Component {
                     screenshotFormat="image/png"
                     width={320}
                 />
-                <br />
-                <div style={{ 'margin': '0 auto!important' }}>
-                    <TextField
-                        style={{ 'position': 'absolute' }}
-                        hintText="provide identification name"
-                        floatingLabelText="Username"
-                        onChange={(event) => this.handleUsername(event)}
-                        className='subject-id'
-                    />
-                </div>
-                <br />
                 <RefreshIndicator
                     className='css-loader'
                     size={80}
@@ -105,8 +87,8 @@ class Register extends Component {
                     style={(this.state.load === false) ? style.hide : style.refresh}
                 />
                 <br />
-                <RaisedButton className='register-button' onClick={this.capture} label="REGISTER" primary={true} style={{ 'margin': 16 }} />
-                <UserRegister detect={this.props.regData} />
+                <RaisedButton onClick={this.capture} label="DETECT" primary={true} style={{ 'margin': 16 }} />
+                <UserRecognize detect={this.props.detData} />
             </div>
         );
     }
@@ -114,8 +96,8 @@ class Register extends Component {
 
 function mapStateToProps(state) {
     return {
-        regData: state.regData
+        detData: state.detData
     }
 }
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, { recognizeUser })(Recognize);

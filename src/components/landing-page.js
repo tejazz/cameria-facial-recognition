@@ -40,7 +40,7 @@ class LandingPage extends Component {
                             <CardText>
                             </CardText>
                             <CardActions>
-                                <Link to={'/detect'}><FlatButton className='flat-btn' label="RECOGNIZE" /></Link>
+                                <Link to={'/recognize'}><FlatButton className='flat-btn' label="RECOGNIZE" /></Link>
                             </CardActions>
                         </Card>
                     </Col>
@@ -68,7 +68,7 @@ class LandingPage extends Component {
                             <CardText>
                             </CardText>
                             <CardActions>
-                                <Link to={'/gallery'}><FlatButton className='flat-btn' label="GALLERY" /></Link>
+                                <FlatButton className='flat-btn' label="GALLERY" />
                             </CardActions>
                         </Card>
                     </Col>

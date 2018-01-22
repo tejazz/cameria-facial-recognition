@@ -19,16 +19,15 @@ const store = createStore(
     applyMiddleware(logger, ReduxPromise)
 );
 
-registerServiceWorker();
-
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
                 <MuiThemeProvider>
-                    <Route path="/" component={App} />
+                    <Route path='/' component={App} />
                 </MuiThemeProvider>
             </div>
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));
+registerServiceWorker();

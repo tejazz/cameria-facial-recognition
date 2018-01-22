@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { connect } from 'react-redux';
-import { fetchGalleryData } from './actions';
-
 // material-ui components
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
-// components to be used
-import Register from './components/register';
-import Capture from './components/capture';
-import LandingPage from './components/landing-page';
-import Gallery from './components/gallery';
-
 import { Route, Switch, Link } from 'react-router-dom';
+
+import LandingPage from './components/landing-page';
+import Recognize from './components/recognize';
+import Register from './components/register';
 
 class App extends Component {
   constructor(props) {
@@ -24,9 +19,6 @@ class App extends Component {
     this.state = {
       toggle: false
     };
-  }
-
-  componentDidMount() {
   }
 
   toggleDrawerMenu() {
@@ -57,27 +49,19 @@ class App extends Component {
           onRequestChange={(toggle) => this.setState({ toggle })}
         >
           <Link to={'/'} className='link'><MenuItem onClick={() => this.handleClose()}>Home</MenuItem></Link>
-          <Link to={'/detect'} className='link'><MenuItem onClick={() => this.handleClose()}>Recognize</MenuItem></Link>
+          <Link to={'/recognize'} className='link'><MenuItem onClick={() => this.handleClose()}>Recognize</MenuItem></Link>
           <Link to={'/register'} className='link'><MenuItem onClick={() => this.handleClose()}>Register</MenuItem></Link>
-          <Link to={'/gallery'} className='link'><MenuItem onClick={() => this.handleClose()}>Gallery</MenuItem></Link>
         </Drawer>
 
         <Switch>
           <Route exact path='/' render={(props) => <LandingPage {...props} />} />
-          <Route path='/detect' render={(props) => <Capture {...props} />} />
+          <Route path='/recognize' render={(props) => <Recognize {...props} />} />
           <Route path='/register' render={(props) => <Register {...props} />} />
-          <Route path='/gallery' render={(props) => <Gallery {...props} gallery={this.props.galleryData} />} />
           <Route path='**' render={(props) => <LandingPage {...props} />} />
-        </Switch >
-      </div >
+        </Switch>
+      </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    galleryData: state.galleryData
-  };
-}
-
-export default connect(mapStateToProps, { fetchGalleryData })(App);
+export default App;

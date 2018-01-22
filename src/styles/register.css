@@ -41,6 +41,10 @@
     cursor: pointer;
 }
 
+h3 {
+    font-family: Helvetica;
+}
+
 /* mobile-based queries */
 @media screen and (max-width: 420px) {
     .css-loader {
