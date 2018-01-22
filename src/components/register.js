@@ -48,9 +48,9 @@ class Register extends Component {
             load: true
         });
         const imageSrc = this.webcam.getScreenshot();
-        console.log(imageSrc);
+        // console.log(imageSrc);
         axios.post(`https://api.kairos.com/enroll`, {
-            gallery_name: 'cameriaGallery',
+            gallery_name: 'newCameriaGallery',
             image: imageSrc,
             subject_id: this.state.username
         }, {
