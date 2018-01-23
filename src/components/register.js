@@ -3,6 +3,7 @@ import Webcam from 'react-webcam';
 import '../styles/register.css';
 
 import axios from 'axios';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { connect } from 'react-redux';
 import { registerUser } from '../actions';
@@ -75,39 +76,43 @@ class Register extends Component {
 
     render() {
         return (
-            <div style={{ 'textAlign': 'center' }}>
-                <h3>REGISTER FACE</h3>
-                <Webcam
-                    audio={false}
-                    height={320}
-                    ref={this.setRef}
-                    screenshotFormat="image/png"
-                    width={320}
-                />
-                <br />
-                <div style={{ 'margin': '0 auto!important' }}>
-                    <TextField
-                        style={{ 'position': 'absolute' }}
-                        hintText="provide identification name"
-                        floatingLabelText="Username"
-                        onChange={(event) => this.handleUsername(event)}
-                        className='subject-id'
-                    />
-                </div>
-                <br />
-                <RefreshIndicator
-                    className='css-loader'
-                    size={80}
-                    left={70}
-                    top={0}
-                    loadingColor="#ADD8E6"
-                    status="loading"
-                    style={(this.state.load === false) ? style.hide : style.refresh}
-                />
-                <br />
-                <RaisedButton className='register-button' onClick={this.capture} label="REGISTER" primary={true} style={{ 'margin': 16 }} />
-                <UserRegister detect={this.props.regData} />
-            </div>
+            <Grid fluid>
+                <Row>
+                    <Col xs={12} md={4} mdOffset={4}>
+                        <div style={{ 'textAlign': 'center' }}>
+                            <h3>REGISTER FACE</h3>
+                            <Webcam
+                                audio={false}
+                                height={320}
+                                ref={this.setRef}
+                                screenshotFormat="image/png"
+                                width={320}
+                            />
+                            <br />
+                            <div style={{ 'margin': '0 auto!important' }}>
+                                <TextField
+                                    hintText="provide identification name"
+                                    floatingLabelText="Username"
+                                    onChange={(event) => this.handleUsername(event)}
+                                />
+                            </div>
+                            <br />
+                            <RefreshIndicator
+                                className='css-loader'
+                                size={80}
+                                left={70}
+                                top={0}
+                                loadingColor="#ADD8E6"
+                                status="loading"
+                                style={(this.state.load === false) ? style.hide : style.refresh}
+                            />
+                            <br />
+                            <RaisedButton className='register-button' onClick={this.capture} label="REGISTER" primary={true} style={{ 'margin': 16 }} />
+                            <UserRegister detect={this.props.regData} />
+                        </div>
+                    </Col>
+                </Row>
+            </Grid>
         );
     }
 }

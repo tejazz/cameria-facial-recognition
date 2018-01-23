@@ -1,10 +1,10 @@
 .css-loader {
-    top: -9793px!important;
-    left: -9283px!important;
+    top: -9834px!important;
+    left: -9916px!important;
 }
 
 .register-button {
-    margin-top: 75px!important;
+    margin-top: 3px!important;
 }
 
 .subject-id {
@@ -43,22 +43,23 @@
 
 h3 {
     font-family: Helvetica;
+    text-align: center;
 }
 
 /* mobile-based queries */
 @media screen and (max-width: 420px) {
     .css-loader {
-        top: -9761px!important;
-        left: -9918px!important;
+        top: -9834px!important;
+        left: -9916px!important;
     }
-
+    
     .subject-id {
         right: 56px!important;
         top: 434px;
     }
 
     .register-button {
-        margin-top: 36px!important;
+        margin-top: -6px!important;
     }
 }   
 

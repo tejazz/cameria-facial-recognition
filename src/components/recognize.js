@@ -6,6 +6,7 @@ import '../styles/register.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
@@ -68,28 +69,34 @@ class Recognize extends Component {
 
     render() {
         return (
-            <div style={{ 'textAlign': 'center' }}>
-                <h3>DETECT FACE</h3>
-                <Webcam
-                    audio={false}
-                    height={320}
-                    ref={this.setRef}
-                    screenshotFormat="image/png"
-                    width={320}
-                />
-                <RefreshIndicator
-                    className='css-loader'
-                    size={80}
-                    left={70}
-                    top={0}
-                    loadingColor="#ADD8E6"
-                    status="loading"
-                    style={(this.state.load === false) ? style.hide : style.refresh}
-                />
-                <br />
-                <RaisedButton onClick={this.capture} label="DETECT" primary={true} style={{ 'margin': 16 }} />
-                <UserRecognize detect={this.props.detData} />
-            </div>
+            <Grid fluid>
+                <Row>
+                    <Col xs={12} md={4} mdOffset={4}>
+                        <div style={{ 'textAlign': 'center' }}>
+                            <h3>DETECT FACE</h3>
+                            <Webcam
+                                audio={false}
+                                height={320}
+                                ref={this.setRef}
+                                screenshotFormat="image/png"
+                                width={320}
+                            />
+                            <RefreshIndicator
+                                className='css-loader'
+                                size={80}
+                                left={70}
+                                top={0}
+                                loadingColor="#ADD8E6"
+                                status="loading"
+                                style={(this.state.load === false) ? style.hide : style.refresh}
+                            />
+                            <br />
+                            <RaisedButton onClick={this.capture} label="DETECT" primary={true} style={{ 'margin': 16 }} />
+                            <UserRecognize detect={this.props.detData} />
+                        </div>
+                    </Col>
+                </Row>
+            </Grid>
         );
     }
 }

@@ -7,8 +7,9 @@ import detectImg from '../assets/images/detect-img.jpg';
 import registerImg from '../assets/images/register-img.jpg';
 import galleryImg from '../assets/images/gallery-img.jpg';
 
-// material-ui components
 import { Grid, Row, Col } from 'react-flexbox-grid';
+
+// material-ui components
 import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
