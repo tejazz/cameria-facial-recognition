@@ -53,8 +53,8 @@ class Recognize extends Component {
             image: imageSrc
         }, {
                 headers: {
-                    app_id: '18cac37a',
-                    app_key: '600e696b44be685585afc44e0b9b144e'
+                    app_id: <enter your app id here>,
+                    app_key: <enter your app key here>
                 }
             }).then((response) => {
                 console.log('response', response);
