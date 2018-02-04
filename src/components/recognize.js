@@ -10,7 +10,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { recognizeUser } from '../actions';
+import { recognizeUser, clearDisplayData } from '../actions';
 
 import UserRecognize from './user-recognize';
 
@@ -37,6 +37,11 @@ class Recognize extends Component {
             load: false
         };
     }
+
+    componentDidMount() {
+        this.props.clearDisplayData();
+    }
+
     setRef = (webcam) => {
         this.webcam = webcam;
     }
@@ -47,14 +52,14 @@ class Recognize extends Component {
         });
 
         const imageSrc = this.webcam.getScreenshot();
-        // console.log(imageSrc);
+
         axios.post(`https://api.kairos.com/recognize`, {
             gallery_name: 'newCameriaGallery',
             image: imageSrc
         }, {
                 headers: {
-                    app_id: '18cac37a',
-                    app_key: '600e696b44be685585afc44e0b9b144e'
+                    app_id: <enter your app id here>,
+                    app_key: <enter your app key here>
                 }
             }).then((response) => {
                 console.log('response', response);
@@ -107,4 +112,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { recognizeUser })(Recognize);
+export default connect(mapStateToProps, { recognizeUser, clearDisplayData })(Recognize);

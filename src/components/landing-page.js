@@ -67,6 +67,7 @@ class LandingPage extends Component {
                             </CardMedia>
                             <CardTitle title="Face Gallery" />
                             <CardText>
+                                Deprecated for now due to API call limit
                             </CardText>
                             <CardActions>
                                 <FlatButton className='flat-btn' label="GALLERY" />

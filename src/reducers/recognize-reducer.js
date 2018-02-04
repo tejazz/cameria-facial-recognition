@@ -1,4 +1,4 @@
-import { RECOGNIZE_USER } from '../actions';
+import { RECOGNIZE_USER, CLEAR_DISPLAY } from '../actions';
 
 export default (state = {}, action) => {
     switch (action.type) {
@@ -19,6 +19,8 @@ export default (state = {}, action) => {
                 finalData.message = 'failure';
             }
             return finalData;
+        case CLEAR_DISPLAY: 
+            return {};
         default:
             return state;
     }

@@ -1,6 +1,6 @@
 .css-loader {
     top: -9834px!important;
-    left: -9916px!important;
+    left: -9863px!important;
 }
 
 .register-button {
@@ -34,13 +34,6 @@
     margin-bottom: -18px!important;
 }
 
-.delete-data {
-    height: 19px;
-    width: 19px;
-    float: right!important;
-    cursor: pointer;
-}
-
 h3 {
     font-family: Helvetica;
     text-align: center;
@@ -66,8 +59,8 @@ h3 {
 /* middle-sized devices queries */
 @media (max-width: 800px) and (min-width: 750px) {
     .css-loader {
-        top: -9793px!important;
-        left: -9731px!important;
+        top: -9812px!important;
+        left: -9974px!important;
     }
 
     .col-xs-12.col-md-3 {
@@ -79,8 +72,8 @@ h3 {
 /* ipad and related devices */
 @media (max-width: 1030px) and (min-width: 1020px) {
     .css-loader {
-        top: -9793px!important;
-        left: -9608px!important;
+        top: -9815px!important;
+        left: -9930px!important;
     }
 
     .col-xs-12.col-md-3 {

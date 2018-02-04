@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { connect } from 'react-redux';
-import { registerUser } from '../actions';
+import { registerUser, clearDisplayData } from '../actions';
 
 import UserRegister from './user-register';
 
@@ -40,24 +40,35 @@ class Register extends Component {
         };
     }
 
+    componentDidMount() {
+        this.props.clearDisplayData();
+    }
+
     setRef = (webcam) => {
         this.webcam = webcam;
     }
 
     capture = () => {
+
+        if (this.state.username === '' || this.state.username === ' ') {
+            alert('Username cannot be empty');
+            return;
+        }
+
         this.setState({
             load: true
         });
+
         const imageSrc = this.webcam.getScreenshot();
-        // console.log(imageSrc);
+
         axios.post(`https://api.kairos.com/enroll`, {
             gallery_name: 'newCameriaGallery',
             image: imageSrc,
             subject_id: this.state.username
         }, {
                 headers: {
-                    app_id: '18cac37a',
-                    app_key: '600e696b44be685585afc44e0b9b144e'
+                    app_id: <enter your app id here>,
+                    app_key: <enter your app key here>
                 }
             }).then((response) => {
                 console.log(response);
@@ -66,7 +77,28 @@ class Register extends Component {
                     load: false
                 });
             });
-    };
+    }
+
+    resetGallery = () => {
+
+        this.setState({
+            load: true
+        });
+
+        axios.post(`https://api.kairos.com/gallery/remove`, {
+            gallery_name: "newCameriaGallery"
+        }, {
+                headers: {
+                    app_id: '18cac37a',
+                    app_key: 'b6cd34e621dd6c06efde7e5a82419d68'
+                }
+            }).then((response) => {
+                alert('Gallery has been reset. Feel free to register now');
+                this.setState({
+                    load: false
+                });
+            });
+    }
 
     handleUsername(e) {
         this.setState({
@@ -108,6 +140,7 @@ class Register extends Component {
                             />
                             <br />
                             <RaisedButton className='register-button' onClick={this.capture} label="REGISTER" primary={true} style={{ 'margin': 16 }} />
+                            <RaisedButton className='register-button' onClick={this.resetGallery} label="RESET GALLERY" primary={true} style={{ 'margin': 16 }} />
                             <UserRegister detect={this.props.regData} />
                         </div>
                     </Col>
@@ -123,4 +156,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, { registerUser, clearDisplayData })(Register);
